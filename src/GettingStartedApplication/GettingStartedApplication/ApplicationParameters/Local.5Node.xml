@@ -10,5 +10,6 @@
     <Parameter Name="MyActorService_PartitionCount" Value="9" />
     <Parameter Name="MyActorService_TargetReplicaSetSize" Value="1" />
     <Parameter Name="MyActorService_MinReplicaSetSize" Value="1" />
+    <Parameter Name="MyWorkerActorService_PartitionCount" Value="1" />
   </Parameters>
 </Application>

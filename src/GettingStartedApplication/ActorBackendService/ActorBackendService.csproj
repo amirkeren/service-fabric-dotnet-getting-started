@@ -113,6 +113,10 @@
       <Project>{AFA658C2-2ED3-490A-9C6A-B1C579CAA941}</Project>
       <Name>ActorBackendService.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WorkerBackendService.Interfaces\WorkerBackendService.Interfaces.csproj">
+      <Project>{841F47B4-E586-421C-87A0-CEB93395E799}</Project>
+      <Name>WorkerBackendService.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ServiceFabric.Actors.2.8.211\build\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors.2.8.211\build\Microsoft.ServiceFabric.Actors.targets')" />

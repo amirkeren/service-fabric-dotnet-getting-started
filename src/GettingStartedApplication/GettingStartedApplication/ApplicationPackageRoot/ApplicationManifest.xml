@@ -11,10 +11,14 @@
     <Parameter Name="WebService_StatefulBackendServiceName" DefaultValue="StatefulBackendService" />
     <Parameter Name="WebService_StatelessBackendServiceName" DefaultValue="StatelessBackendService" />
     <Parameter Name="WebService_ActorBackendServiceName" DefaultValue="MyActorService" />
+    <Parameter Name="WebService_WorkerBackendServiceName" DefaultValue="MyWorkerActorService" />
     <Parameter Name="WebService_ReverseProxyPort" DefaultValue="19081" />
     <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyWorkerActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="MyWorkerActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyWorkerActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -41,6 +45,7 @@
             <Parameter Name="StatefulBackendServiceName" Value="[WebService_StatefulBackendServiceName]" />
             <Parameter Name="StatelessBackendServiceName" Value="[WebService_StatelessBackendServiceName]" />
             <Parameter Name="ActorBackendServiceName" Value="[WebService_ActorBackendServiceName]" />
+            <Parameter Name="WorkerBackendServiceName" Value="[WebService_WorkerBackendServiceName]" />
             <Parameter Name="ReverseProxyPort" Value="[WebService_ReverseProxyPort]" />
           </Section>
         </Settings>
@@ -49,6 +54,9 @@
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ActorBackendServicePkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="WorkerBackendServicePkg" ServiceManifestVersion="1.0.0" />
   </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
@@ -79,6 +87,11 @@
     <Service Name="MyActorService" GeneratedIdRef="8ee0b536-a5bd-4862-ae99-122d1c45ef10|Persisted">
       <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="MyWorkerActorService" GeneratedIdRef="c7a45b6d-e54b-435c-bc52-b39af22f4eed|Persisted">
+      <StatefulService ServiceTypeName="MyWorkerActorServiceType" TargetReplicaSetSize="[MyWorkerActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyWorkerActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[MyWorkerActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
   </DefaultServices>
